@@ -26,6 +26,9 @@
     "publish-docs": "npm run parse-docs && gulp publish-docs",
     "publish-packages": "gulp publish-packages"
   },
+  "dependencies": {
+    "react-native-size-matters": "https://github.com/tsejerome/react-native-size-matters.git"
+  },
   "devDependencies": {
     "@babel/core": "^7.6.2",
     "@babel/plugin-proposal-decorators": "^7.6.2",
