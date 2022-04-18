@@ -17,11 +17,12 @@ const styleKeysList = [
   'marginRight',
   'marginTop',
   'marginBottom',
+  'fontSize',
 ]
 
 const scaleStyleObject = (containerParameters) => {
   for (const key in containerParameters) {
-    if (styleKeysList.includes(key)) {
+    if (styleKeysList.includes(key) && typeof containerParameters[key] === 'number') {
       containerParameters[key] = scale(containerParameters[key])
     }
   }

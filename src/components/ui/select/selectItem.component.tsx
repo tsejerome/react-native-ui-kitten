@@ -4,14 +4,14 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import React from 'react';
+import React from "react";
 import {
   GestureResponderEvent,
   ImageProps,
   NativeSyntheticEvent,
   StyleSheet,
   TargetedEvent,
-} from 'react-native';
+} from "react-native";
 import {
   FalsyFC,
   FalsyText,
@@ -22,29 +22,38 @@ import {
   TouchableWebProps,
   Overwrite,
   LiteralUnion,
-} from '../../devsupport';
+} from "../../devsupport";
 import {
   Interaction,
   styled,
   StyledComponentProps,
   StyleType,
-} from '../../theme';
-import {
-  CheckBox,
-  CheckBoxElement,
-} from '../checkbox/checkbox.component';
-import { TextProps } from '../text/text.component';
-import { SelectItemDescriptor } from './select.service';
+} from "../../theme";
+import { CheckBox, CheckBoxElement } from "../checkbox/checkbox.component";
+import { TextProps } from "../text/text.component";
+import { SelectItemDescriptor } from "./select.service";
+import scaleStyleObject from "../../utils/containerScaling";
 
-type SelectItemStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: LiteralUnion<'default' | 'grouped'>;
-}>;
+type SelectItemStyledProps = Overwrite<
+  StyledComponentProps,
+  {
+    appearance?: LiteralUnion<"default" | "grouped">;
+  }
+>;
 
-type TouchableSelectProps = Overwrite<TouchableWebProps, {
-  onPress?: (descriptor: SelectItemDescriptor, event?: GestureResponderEvent) => void;
-}>;
+type TouchableSelectProps = Overwrite<
+  TouchableWebProps,
+  {
+    onPress?: (
+      descriptor: SelectItemDescriptor,
+      event?: GestureResponderEvent
+    ) => void;
+  }
+>;
 
-export interface SelectItemProps extends TouchableSelectProps, SelectItemStyledProps {
+export interface SelectItemProps
+  extends TouchableSelectProps,
+    SelectItemStyledProps {
   title?: RenderProp<TextProps> | React.ReactText;
   accessoryLeft?: RenderProp<Partial<ImageProps>>;
   accessoryRight?: RenderProp<Partial<ImageProps>>;
@@ -76,9 +85,8 @@ export type SelectItemElement = React.ReactElement<SelectItemProps>;
  *
  * @overview-example SelectItemSimpleUsage
  */
-@styled('SelectOption')
+@styled("SelectOption")
 export class SelectItem extends React.Component<SelectItemProps> {
-
   private get isMultiSelect(): boolean {
     if (this.props.descriptor) {
       return this.props.descriptor.multiSelect;
@@ -125,31 +133,32 @@ export class SelectItem extends React.Component<SelectItemProps> {
   };
 
   private getComponentStyle = (style: StyleType) => {
-    const { paddingHorizontal, paddingLeft, paddingVertical, backgroundColor } = style;
+    const { paddingHorizontal, paddingLeft, paddingVertical, backgroundColor } =
+      style;
 
-    const textStyles = PropsService.allWithPrefix(style, 'text');
-    const iconStyles = PropsService.allWithPrefix(style, 'icon');
+    const textStyles = PropsService.allWithPrefix(style, "text");
+    const iconStyles = PropsService.allWithPrefix(style, "icon");
 
     return {
-      container: {
+      container: scaleStyleObject({
         paddingHorizontal: paddingHorizontal,
         paddingLeft: paddingLeft,
         paddingVertical: paddingVertical,
         backgroundColor: backgroundColor,
-      },
-      text: {
+      }),
+      text: scaleStyleObject({
         marginHorizontal: textStyles.textMarginHorizontal,
         fontFamily: textStyles.textFontFamily,
         fontSize: textStyles.textFontSize,
         fontWeight: textStyles.textFontWeight,
         color: textStyles.textColor,
-      },
-      icon: {
+      }),
+      icon: scaleStyleObject({
         width: iconStyles.iconWidth,
         height: iconStyles.iconHeight,
         marginHorizontal: iconStyles.iconMarginHorizontal,
         tintColor: iconStyles.iconTintColor,
-      },
+      }),
     };
   };
 
@@ -168,7 +177,14 @@ export class SelectItem extends React.Component<SelectItemProps> {
   };
 
   public render(): TouchableWebElement {
-    const { eva, style, title, accessoryLeft, accessoryRight, ...touchableProps } = this.props;
+    const {
+      eva,
+      style,
+      title,
+      accessoryLeft,
+      accessoryRight,
+      ...touchableProps
+    } = this.props;
     const evaStyle = this.getComponentStyle(eva.style);
 
     return (
@@ -181,20 +197,15 @@ export class SelectItem extends React.Component<SelectItemProps> {
         onBlur={this.onBlur}
         onPress={this.onPress}
         onPressIn={this.onPressIn}
-        onPressOut={this.onPressOut}>
+        onPressOut={this.onPressOut}
+      >
         <FalsyFC
           style={evaStyle.icon}
           component={accessoryLeft}
           fallback={this.renderAccessory(evaStyle.icon)}
         />
-        <FalsyText
-          style={[styles.text, evaStyle.text]}
-          component={title}
-        />
-        <FalsyFC
-          style={evaStyle.icon}
-          component={accessoryRight}
-        />
+        <FalsyText style={[styles.text, evaStyle.text]} component={title} />
+        <FalsyFC style={evaStyle.icon} component={accessoryRight} />
       </TouchableWeb>
     );
   }
@@ -202,12 +213,12 @@ export class SelectItem extends React.Component<SelectItemProps> {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   text: {
     flex: 1,
-    textAlign: 'left',
+    textAlign: "left",
   },
 });

@@ -6,6 +6,13 @@ UI Kitten Size Mattered is a React Native UI Library that allows you creating st
 This library is basically `@ui-kitten/component` and `react-native-size-matters` having a baby.
 
 **NOTE: This is a WIP Package**.
+Currently resized components:
+
+- [x] Text
+- [x] Button
+- [x] ButtonGroup
+- [x] Select
+- [x] SelectItem
 
 The library is based on Eva Design System which brings consistency and scalability in the design and development process.
 It contains a set of general purpose UI components styled in a similar way.
