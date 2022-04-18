@@ -4,14 +4,16 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import React from 'react';
+import scaleStyleObject from "../../utils/containerScaling";
+import React from "react";
 import {
   GestureResponderEvent,
   ImageProps,
   NativeSyntheticEvent,
   StyleSheet,
   TargetedEvent,
-} from 'react-native';
+} from "react-native";
+import { scale } from "react-native-size-matters";
 import {
   EvaSize,
   EvaStatus,
@@ -23,18 +25,21 @@ import {
   TouchableWebProps,
   Overwrite,
   LiteralUnion,
-} from '../../devsupport';
+} from "../../devsupport";
 import {
   Interaction,
   styled,
   StyledComponentProps,
   StyleType,
-} from '../../theme';
-import { TextProps } from '../text/text.component';
+} from "../../theme";
+import { TextProps } from "../text/text.component";
 
-type ButtonStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: LiteralUnion<'filled' | 'outline' | 'ghost'>;
-}>;
+type ButtonStyledProps = Overwrite<
+  StyledComponentProps,
+  {
+    appearance?: LiteralUnion<"filled" | "outline" | "ghost">;
+  }
+>;
 
 export interface ButtonProps extends TouchableWebProps, ButtonStyledProps {
   children?: RenderProp<TextProps> | React.ReactText;
@@ -118,9 +123,8 @@ export type ButtonElement = React.ReactElement<ButtonProps>;
  * In most cases this is redundant, if [custom theme is configured](guides/branding).
  */
 
-@styled('Button')
+@styled("Button")
 export class Button extends React.Component<ButtonProps> {
-
   private onMouseEnter = (event: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([Interaction.HOVER]);
     this.props.onMouseEnter && this.props.onMouseEnter(event);
@@ -152,7 +156,7 @@ export class Button extends React.Component<ButtonProps> {
   };
 
   private getComponentStyle = (source: StyleType) => {
-    const {
+    let {
       textColor,
       textFontFamily,
       textFontSize,
@@ -164,6 +168,12 @@ export class Button extends React.Component<ButtonProps> {
       iconMarginHorizontal,
       ...containerParameters
     } = source;
+    textFontSize = scale(textFontSize);
+    textMarginHorizontal = scale(textMarginHorizontal);
+    iconWidth = scale(iconWidth);
+    iconHeight = scale(iconHeight);
+    iconMarginHorizontal = scale(iconMarginHorizontal);
+    containerParameters = scaleStyleObject(containerParameters);
 
     return {
       container: containerParameters,
@@ -184,7 +194,14 @@ export class Button extends React.Component<ButtonProps> {
   };
 
   public render(): TouchableWebElement {
-    const { eva, style, accessoryLeft, accessoryRight, children, ...touchableProps } = this.props;
+    const {
+      eva,
+      style,
+      accessoryLeft,
+      accessoryRight,
+      children,
+      ...touchableProps
+    } = this.props;
     const evaStyle = this.getComponentStyle(eva.style);
 
     return (
@@ -196,19 +213,11 @@ export class Button extends React.Component<ButtonProps> {
         onFocus={this.onFocus}
         onBlur={this.onBlur}
         onPressIn={this.onPressIn}
-        onPressOut={this.onPressOut}>
-        <FalsyFC
-          style={evaStyle.icon}
-          component={accessoryLeft}
-        />
-        <FalsyText
-          style={evaStyle.text}
-          component={children}
-        />
-        <FalsyFC
-          style={evaStyle.icon}
-          component={accessoryRight}
-        />
+        onPressOut={this.onPressOut}
+      >
+        <FalsyFC style={evaStyle.icon} component={accessoryLeft} />
+        <FalsyText style={evaStyle.text} component={children} />
+        <FalsyFC style={evaStyle.icon} component={accessoryRight} />
       </TouchableWeb>
     );
   }
@@ -216,8 +225,8 @@ export class Button extends React.Component<ButtonProps> {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });

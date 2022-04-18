@@ -16,6 +16,7 @@ import {
 import { styled, StyledComponentProps, StyleType } from "../../theme";
 import { ButtonElement, ButtonProps } from "../button/button.component";
 import { scale } from "react-native-size-matters";
+import scaleStyleObject from "../../utils/containerScaling";
 
 type ButtonGroupStyledProps = Overwrite<
   StyledComponentProps,
@@ -76,8 +77,9 @@ export type ButtonGroupElement = React.ReactElement<ButtonGroupProps>;
 @styled("ButtonGroup")
 export class ButtonGroup extends React.Component<ButtonGroupProps> {
   private getComponentStyle = (source: StyleType) => {
-    const { dividerBackgroundColor, dividerWidth, ...containerParameters } =
+    let { dividerBackgroundColor, dividerWidth, ...containerParameters } =
       source;
+    containerParameters = scaleStyleObject(containerParameters);
 
     return {
       container: {

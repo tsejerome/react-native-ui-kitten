@@ -4,7 +4,8 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import React from 'react';
+import React from "react";
+import scaleStyleObject from "../../utils/containerScaling";
 import {
   ImageProps,
   NativeSyntheticEvent,
@@ -18,7 +19,8 @@ import {
   View,
   ViewProps,
   ViewStyle,
-} from 'react-native';
+} from "react-native";
+import { scale } from "react-native-size-matters";
 import {
   EvaSize,
   EvaStatus,
@@ -33,18 +35,21 @@ import {
   Overwrite,
   LiteralUnion,
   TouchableWithoutFeedback,
-} from '../../devsupport';
+} from "../../devsupport";
 import {
   Interaction,
   styled,
   StyledComponentProps,
   StyleType,
-} from '../../theme';
-import { TextProps } from '../text/text.component';
+} from "../../theme";
+import { TextProps } from "../text/text.component";
 
-type InputStyledProps = Overwrite<StyledComponentProps, {
-  appearance?: LiteralUnion<'default'>;
-}>;
+type InputStyledProps = Overwrite<
+  StyledComponentProps,
+  {
+    appearance?: LiteralUnion<"default">;
+  }
+>;
 
 export interface InputProps extends TextInputProps, InputStyledProps {
   status?: EvaStatus;
@@ -137,11 +142,14 @@ export type InputElement = React.ReactElement<InputProps>;
  * @overview-example InputTheming
  * In most cases this is redundant, if [custom theme is configured](guides/branding).
  */
-@styled('Input')
-export class Input extends React.Component<InputProps> implements WebEventResponderCallbacks {
-
+@styled("Input")
+export class Input
+  extends React.Component<InputProps>
+  implements WebEventResponderCallbacks
+{
   private textInputRef = React.createRef<TextInput>();
-  private webEventResponder: WebEventResponderInstance = WebEventResponder.create(this);
+  private webEventResponder: WebEventResponderInstance =
+    WebEventResponder.create(this);
 
   public focus = (): void => {
     this.textInputRef.current?.focus();
@@ -169,21 +177,26 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
     this.props.eva.dispatch([]);
   };
 
-  private onTextFieldFocus = (event: NativeSyntheticEvent<TextInputFocusEventData>): void => {
+  private onTextFieldFocus = (
+    event: NativeSyntheticEvent<TextInputFocusEventData>
+  ): void => {
     this.props.eva.dispatch([Interaction.FOCUSED]);
     this.props.onFocus && this.props.onFocus(event);
   };
 
-  private onTextFieldBlur = (event: NativeSyntheticEvent<TextInputFocusEventData>): void => {
+  private onTextFieldBlur = (
+    event: NativeSyntheticEvent<TextInputFocusEventData>
+  ): void => {
     this.props.eva.dispatch([]);
     this.props.onBlur && this.props.onBlur(event);
   };
 
   private getComponentStyle = (source: StyleType) => {
     const flatStyles: ViewStyle = StyleSheet.flatten(this.props.style);
-    const { rest: inputContainerStyle, ...containerStyle } = PropsService.allWithRest(flatStyles, FlexViewCrossStyleProps);
+    const { rest: inputContainerStyle, ...containerStyle } =
+      PropsService.allWithRest(flatStyles, FlexViewCrossStyleProps);
 
-    const {
+    let {
       textMarginHorizontal,
       textFontFamily,
       textFontSize,
@@ -206,6 +219,17 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
       captionFontFamily,
       ...containerParameters
     } = source;
+    textMarginHorizontal = scale(textMarginHorizontal);
+    textFontSize = scale(textFontSize);
+    iconWidth = scale(iconWidth);
+    iconHeight = scale(iconHeight);
+    iconMarginHorizontal = scale(iconMarginHorizontal);
+    labelFontSize = scale(labelFontSize);
+    labelMarginBottom = scale(labelMarginBottom);
+    captionMarginTop = scale(captionMarginTop);
+    captionFontSize = scale(captionFontSize);
+    captionFontWeight = scale(captionFontWeight);
+    containerParameters = scaleStyleObject(containerParameters);
 
     return {
       container: containerStyle,
@@ -264,16 +288,11 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
         testID={testID}
         style={evaStyle.container}
         focusable={false}
-        onPress={this.focus}>
-        <FalsyText
-          style={[evaStyle.label, styles.label]}
-          component={label}
-        />
+        onPress={this.focus}
+      >
+        <FalsyText style={[evaStyle.label, styles.label]} component={label} />
         <View style={[evaStyle.inputContainer, styles.inputContainer]}>
-          <FalsyFC
-            style={evaStyle.icon}
-            component={accessoryLeft}
-          />
+          <FalsyFC style={evaStyle.icon} component={accessoryLeft} />
           <TextInput
             ref={this.textInputRef}
             placeholderTextColor={evaStyle.placeholder.color}
@@ -284,10 +303,7 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
             onFocus={this.onTextFieldFocus}
             onBlur={this.onTextFieldBlur}
           />
-          <FalsyFC
-            style={evaStyle.icon}
-            component={accessoryRight}
-          />
+          <FalsyFC style={evaStyle.icon} component={accessoryRight} />
         </View>
         <FalsyText
           style={[evaStyle.captionLabel, styles.captionLabel]}
@@ -300,20 +316,20 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
 
 const styles = StyleSheet.create({
   inputContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    width: '100%',
+    flexDirection: "row",
+    alignItems: "center",
+    width: "100%",
   },
   text: {
     flexGrow: 1,
     flexShrink: 1,
-    flexBasis: 'auto',
+    flexBasis: "auto",
   },
   label: {
-    textAlign: 'left',
+    textAlign: "left",
   },
   captionLabel: {
-    textAlign: 'left',
+    textAlign: "left",
   },
 });
 
