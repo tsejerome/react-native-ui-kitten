@@ -1,9 +1,9 @@
 {
-  "name": "ui-kitten",
+  "name": "@tsejerome/ui-kitten",
   "version": "5.1.2",
   "private": true,
   "license": "MIT",
-  "author": "akveo <contact@akveo.com>",
+  "author": "tsejerome <tsejerome@hotmail.com>",
   "homepage": "https://github.com/akveo/react-native-ui-kitten#readme",
   "repository": "git+https://github.com/akveo/react-native-ui-kitten.git",
   "bugs": {
@@ -24,7 +24,7 @@
     "parse-docs": "gulp parse-docs",
     "bump-version": "gulp bump-version && conventional-changelog -i CHANGELOG.md -s",
     "publish-docs": "npm run parse-docs && gulp publish-docs",
-    "publish-packages": "gulp publish-packages"
+    "publish-packages": "npm run build && cd dist/tsc-out/components && npm publish --access public --verbose"
   },
   "dependencies": {
     "react-native-size-matters": "https://github.com/tsejerome/react-native-size-matters.git"

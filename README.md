@@ -1,9 +1,12 @@
-
-# UI Kitten [<img src="https://i.imgur.com/oMcxwZ0.png" alt="Eva Design System" height="20px" />][link:eva] [![npm][badge:license]]() [![Build Status][badge:github-actions]][link:github-actions] [![Coverage Status][badge:coveralls]][link:coveralls]
+# UI Kitten Size Mattered [<img src="https://i.imgur.com/oMcxwZ0.png" alt="Eva Design System" height="20px" />][link:eva] [![npm][badge:license]]() [![Build Status][badge:github-actions]][link:github-actions] [![Coverage Status][badge:coveralls]][link:coveralls]
 
 [Documentation][link:doc-homepage]
 
-UI Kitten is a React Native UI Library that allows you creating stunning multi-brand cross-platform mobile applications.
+UI Kitten Size Mattered is a React Native UI Library that allows you creating stunning multi-brand cross-platform mobile applications.
+This library is basically `@ui-kitten/component` and `react-native-size-matters` having a baby.
+
+**NOTE: This is a WIP Package**.
+
 The library is based on Eva Design System which brings consistency and scalability in the design and development process.
 It contains a set of general purpose UI components styled in a similar way.
 And the most awesome thing: the themes can be changed in the runtime, with no need to reload the application.
@@ -30,7 +33,7 @@ And the most awesome thing: the themes can be changed in the runtime, with no ne
 **Kitten Tricks** – [react-native starter kit][link:kitten-tricks] allows you to boost the development of a mobile app.
 There is a huge variety of customizable layouts, use “as is” or add new blocks.
 
-**Over 40 screens in dark and light themes** give you the possibility to create a bright and exclusive app while saving your time on compiling numerous details.  Also, you can download the source code and use it for your own benefit.
+**Over 40 screens in dark and light themes** give you the possibility to create a bright and exclusive app while saving your time on compiling numerous details. Also, you can download the source code and use it for your own benefit.
 
 ## Quick Start
 
@@ -56,6 +59,7 @@ Easy way to integrate UI Kitten with backend ([Java][link:ui-kitten-bundle-java]
 [<img src="https://i.imgur.com/HVNZQGR.jpg">][link:ui-kitten-bundles]
 
 ## How can I support the developers?
+
 - Star our GitHub repo :star:
 - Create pull requests, submit bugs, suggest new features or documentation updates :wrench:
 - Read us on [Medium][link:akveo-medium]
@@ -63,19 +67,21 @@ Easy way to integrate UI Kitten with backend ([Java][link:ui-kitten-bundle-java]
 - Like our page on [Facebook][link:akveo-facebook]
 
 ## License
+
 [MIT](LICENSE.txt) license.
 
 ## More from Akveo
+
 - [Eva Icons][link:eva-icons] - 480+ beautiful Open Source icons
 
 ## From Developers
+
 Made with :heart: by [Akveo team][link:akveo-homepage]. Follow us on [Twitter][link:akveo-twitter] to get the latest news first!
 We're always happy to receive your feedback!
 
 [badge:license]: https://img.shields.io/npm/l/react-native-ui-kitten.svg
 [badge:github-actions]: https://github.com/akveo/react-native-ui-kitten/workflows/Build/badge.svg
 [badge:coveralls]: https://coveralls.io/repos/github/akveo/react-native-ui-kitten/badge.svg?branch=master
-
 [link:eva]: https://eva.design?utm_campaign=eva_design%20-%20home%20-%20ui_kitten%20github&utm_source=ui_kitten&utm_medium=referral&utm_content=kitten_github_readme
 [link:github-actions]: https://github.com/akveo/react-native-ui-kitten/actions
 [link:coveralls]: https://coveralls.io/github/akveo/react-native-ui-kitten?branch=master
