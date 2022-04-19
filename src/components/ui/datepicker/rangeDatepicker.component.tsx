@@ -4,22 +4,25 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import React from 'react';
-import { styled } from '../../theme';
+import React from "react";
+import { styled } from "../../theme";
 import {
   BaseDatepickerComponent,
   BaseDatepickerProps,
-} from './baseDatepicker.component';
+} from "./baseDatepicker.component";
 import {
   RangeCalendar,
   RangeCalendarElement,
   RangeCalendarProps,
-} from '../calendar/rangeCalendar.component';
-import { RenderProp } from '@ui-kitten/components/devsupport';
-import { TextProps } from '@ui-kitten/components';
+} from "../calendar/rangeCalendar.component";
+import { RenderProp } from "../../devsupport";
+import { TextProps } from "../../index";
 
-export type RangeDatepickerProps<D = Date> = BaseDatepickerProps<D> & RangeCalendarProps<D>;
-export type RangeDatepickerElement<D = Date> = React.ReactElement<RangeDatepickerProps<D>>;
+export type RangeDatepickerProps<D = Date> = BaseDatepickerProps<D> &
+  RangeCalendarProps<D>;
+export type RangeDatepickerElement<D = Date> = React.ReactElement<
+  RangeDatepickerProps<D>
+>;
 
 /**
  * Range date picker provides a simple way to select a date range within a picker displayed in modal.
@@ -130,10 +133,12 @@ export type RangeDatepickerElement<D = Date> = React.ReactElement<RangeDatepicke
  * Ranged picker works with special range object - CalendarRange: `{ startDate: Date, endDate: Date }`.
  * For incomplete ranges, there is only a `startDate` property.
  */
-@styled('Datepicker')
-export class RangeDatepicker<D = Date> extends BaseDatepickerComponent<RangeDatepickerProps<D>, D> {
-
-  static styledComponentName: string = 'Datepicker';
+@styled("Datepicker")
+export class RangeDatepicker<D = Date> extends BaseDatepickerComponent<
+  RangeDatepickerProps<D>,
+  D
+> {
+  static styledComponentName: string = "Datepicker";
 
   constructor(props: RangeDatepickerProps<D>) {
     super(props);
@@ -169,8 +174,12 @@ export class RangeDatepicker<D = Date> extends BaseDatepickerComponent<RangeDate
     const { startDate, endDate } = this.props.range;
 
     if (startDate || endDate) {
-      const start: string = startDate ? this.props.dateService.format(startDate, null) : '';
-      const end: string = endDate ? this.props.dateService.format(endDate, null) : '';
+      const start: string = startDate
+        ? this.props.dateService.format(startDate, null)
+        : "";
+      const end: string = endDate
+        ? this.props.dateService.format(endDate, null)
+        : "";
 
       return `${start} - ${end}`;
     } else {
@@ -181,9 +190,7 @@ export class RangeDatepicker<D = Date> extends BaseDatepickerComponent<RangeDate
   protected renderCalendar(): RangeCalendarElement<D> {
     return (
       // @ts-ignore
-      <RangeCalendar
-        ref={this.calendarRef}
-        {...this.calendarProps} />
+      <RangeCalendar ref={this.calendarRef} {...this.calendarProps} />
     );
   }
 }

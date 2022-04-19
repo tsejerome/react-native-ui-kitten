@@ -35,7 +35,7 @@ import {
 import {
   CalendarViewModeId,
   CalendarViewModes,
-} from '@ui-kitten/components/ui/calendar/type';
+} from '../type';
 
 export interface CalendarHeaderProps extends ViewProps {
   viewModeId: CalendarViewModeId;
