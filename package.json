@@ -1,13 +1,13 @@
 {
   "name": "@tsejerome/ui-kitten",
-  "version": "5.1.5",
+  "version": "5.1.6",
   "private": true,
   "license": "MIT",
   "author": "tsejerome <tsejerome@hotmail.com>",
-  "homepage": "https://github.com/akveo/react-native-ui-kitten#readme",
-  "repository": "git+https://github.com/akveo/react-native-ui-kitten.git",
+  "homepage": "https://github.com/tsejerome/react-native-ui-kitten#readme",
+  "repository": "git+https://github.com/tsejerome/react-native-ui-kitten.git",
   "bugs": {
-    "url": "https://github.com/akveo/react-native-ui-kitten/issues"
+    "url": "https://github.com/tsejerome/react-native-ui-kitten/issues"
   },
   "workspaces": {
     "packages": [
